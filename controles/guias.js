@@ -104,26 +104,6 @@ function deletePractica (req, res) {
   })
 } 
 
-//////////////subir
-function subir (req, res){
-    uploads(req,res,(err)=>{
-      console.log(req.file)
-      if(err){
-        res.status(500).json({
-          message: "no se pudo guardar"
-        })
-      }else{
-        var ruta = req.file.path.substr(6, req.file.path.length)
-        var img = {
-          name: req.file.originalname,
-          physicalpath: req.file.path,
-          relativepath: 'http://localhost:7777',
-          size: req.file.size
-        }
-      }
-      res.status(200).send(img)
-    })
-}
 
 module.exports = {
   getPractica,
@@ -132,6 +112,5 @@ module.exports = {
   getMateria,
   saveMateria,
   updatePractica,
-  deletePractica,
-  subir
+  deletePractica
 }

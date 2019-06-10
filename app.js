@@ -6,12 +6,12 @@ const morgan = require('morgan')
 const routes = require('./rutas')
 const multer = require('multer')
 const path = require('path')
-const uuid = require('uuid/v4');
-const { format } = require('timeago.js');
+//const uuid = require('uuid/v4');
+//const { format } = require('timeago.js');
 const app = express()
-
+var cors = require('cors')
 // Settings
-
+app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(morgan('dev'))
@@ -29,10 +29,6 @@ const storage = multer.diskStorage({
     }
 })
 
-var uploads = multer({
-    storage:storage
-}).single("archivo");
-
 ///
 
 app.use(morgan('dev'));
@@ -47,5 +43,5 @@ app.use(express.urlencoded({extended: true}));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-module.exports = {app,uploads}
+module.exports = app
 
